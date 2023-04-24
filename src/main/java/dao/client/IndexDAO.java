@@ -150,27 +150,19 @@ public class IndexDAO {
 				.list());
 	}
 	public static List<Product> getSuperSellProduct() {
+		Jdbi me = DBContext.me();
 		List<Product> list = new ArrayList<>();
-		String query = "SELECT idProduct,nameProduct,priceProduct,discount\r\n"
-				+ "FROM product p join producers s on p.idProducer = s.idProducer \r\n"
-				+ "where p.isActice ='1' and s.isActice and (100/p.discount*(p.discount-p.priceProduct)>10);";
-		try (Connection conn = DBContext.getConnection();
-			 PreparedStatement ps = conn.prepareStatement(query);
-			 ResultSet rs = ps.executeQuery();) {
-			while (rs.next()) {
-				list.add(new Product(rs.getInt("idProduct"), rs.getString("nameProduct"),
-						rs.getDouble("priceProduct"), UtilDAO.findListImageByIdProduct(rs.getInt("idProduct")),
-						rs.getInt("discount"),rs.getDouble("discountPrice")));
-			}
-		} catch (Exception e) {
 
-		}
-
-		return list;
+		String query = "SELECT p.id,p.nameProduct,product_prices.listPrice,discount,discountPrice FROM kidstore.products p join kidstore.product_prices on p.id = product_prices.idProduct limit 10";
+		return me.withHandle(handle -> handle.createQuery(query)
+				.map((rs, ctx) -> new Product(rs.getInt("id"), rs.getString("nameProduct"),
+						rs.getDouble("listPrice"), UtilDAO.findListImageByIdProduct(rs.getInt("id")),
+						rs.getInt("discount"),rs.getDouble("discountPrice")))
+				.list());
 	}
 
 	public static void main(String[] args) {
-		System.out.println(getSellProduct());
+		System.out.println(getSuperSellProduct());
 //		System.out.println(getSellProductTwo());
 
 	}

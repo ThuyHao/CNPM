@@ -101,49 +101,6 @@ public class AuthDAO {
 		return false;
 	}
 
-	public static void editAccountInfo(String user, String address, String phone, String uid) {
-		String query = "update customer set userName = ? ,Address = ?,NumberPhone = ?  where idCustomer = ?;";
-		try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
-			ps.setString(1, user);
-			ps.setString(2, address);
-			ps.setString(3, phone);
-			ps.setString(4, uid);
-			ps.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static Account checkAccountOldPassword(String uid, String pass) {
-		pass = EnCode.toSHA1(pass);
-		String query = "select idCustomer,userName,password,Name,Address,Email,NumberPhone,id_role_member from customer from customer where idCustomer = ? and password = ?";
-		try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
-			ps.setString(1, uid);
-			ps.setString(2, pass);
-			try (ResultSet rs = ps.executeQuery()) {
-				while (rs.next()) {
-					return new Account(rs.getInt("idCustomer"), rs.getString("userName"), rs.getString("password"),
-							rs.getString("Name"), rs.getString("Address"), rs.getString("Email"),
-							rs.getString("NumberPhone"), rs.getInt("id_role_member"));
-				}
-			}
-		} catch (Exception e) {
-		}
-		return null;
-	}
-
-	public static void editAccountPassword(String uid, String newpass) {
-		String query = "update idCustomer set password = ? where idCustomer = ?;";
-		newpass = EnCode.toSHA1(newpass);
-		try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(query);) {
-
-			ps.setString(1, newpass);
-			ps.setString(2, uid);
-			ps.executeUpdate();
-		} catch (Exception e) {
-		}
-	}
-
 	public static void signUpGoogle(String id, String name, String email, String picture) {
 		String ggCus = "insert into accounts (accountName, password, fullName, email, image, type, idOther) values (:accountName, :password, :fullName, :email, :image, :type, :idOther)";
 		Jdbi me = DBContext.me();
@@ -196,13 +153,6 @@ public class AuthDAO {
 	public static Account loginFacebook(String id, String email) {
 		String loginFBQuery = "select id, accountName, password, fullName, email, image, type, idOther from accounts where idOther= ? and email = ? and type = 2";
 		return getAccount(id, email, loginFBQuery);
-	}
-
-	public static void main(String[] args) {
-//		System.out.println(loginFacebook("dsadasd", "asdasd@@"));
-//		signUpFacebook("asdas", "asdasd", "asdasd", "rwer");
-//		signUpGoogle("asdas", "asdasd", "asdasd", "rwer");
-		System.out.println(loginGG("asdas", "asdasd"));
 	}
 
 }

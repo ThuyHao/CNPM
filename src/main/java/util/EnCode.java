@@ -24,6 +24,6 @@ public class EnCode {
 		return result;
 	}
 	public static void main(String[] args) {
-		System.out.println(toSHA1("L0123456Lll!@"));
+		System.out.println(toSHA1("123"));
 	}
 }
