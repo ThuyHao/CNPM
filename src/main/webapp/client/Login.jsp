@@ -76,7 +76,7 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p>
-										<fmt:message key="email" bundle="${lang}"></fmt:message>
+										<fmt:message key="account" bundle="${lang}"></fmt:message>
 									</p>
 								</div>
 								<div class="col-md-10">

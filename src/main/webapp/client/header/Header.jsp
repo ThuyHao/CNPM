@@ -136,8 +136,8 @@
                         <a href="${pageContext.request.contextPath}/client/Introduce.jsp"><fmt:message
                                 key="Introduce" bundle="${lang}"></fmt:message></a></li>
 
-                    <li class=""><c:url var="service" value="/client/Service.jsp"></c:url>
-                        <a href="${pageContext.request.contextPath}/${service}"><fmt:message
+                    <li class="">
+                        <a href="${pageContext.request.contextPath}/client/Service.jsp"><fmt:message
                                 key="service" bundle="${lang}"></fmt:message></a></li>
 
                 </ul>
@@ -179,8 +179,8 @@
                             href="https://vnexpress.net/tag/thoi-trang-tre-em-92352"><fmt:message
                             key="news" bundle="${lang}"></fmt:message></a></li>
 
-                    <li class=""><c:url var="contact" value="/client/Contact.jsp"></c:url>
-                        <a href="${pageContext.request.contextPath}/${contact}"><fmt:message
+                    <li class="">
+                        <a href="${pageContext.request.contextPath}/client/Contact.jsp"><fmt:message
                                 key="Contact" bundle="${lang}"></fmt:message></a></li>
                 </ul>
             </div>
