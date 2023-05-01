@@ -26,8 +26,6 @@ public class EditControl extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String phoneNumber = request.getParameter("phoneNumber");
-//				AuthDAO.editAccountInfo(name, address, phoneNumber, String.valueOf(account.getId()));
-//				account.setUser(name);
 				account.setAddress(address);
 				account.setPhone(phoneNumber);
 				session.setAttribute("acc", account);

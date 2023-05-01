@@ -12,23 +12,6 @@ import entity.Product;
 import entity.View;
 
 public class IndexDAO {
-	//	public static List<Product> getSellProduct() {
-//		List<Product> list = new ArrayList<>();
-//		String query = "SELECT p.idProduct,nameProduct,priceProduct,d.percentage FROM kidstore.products p join kidstore.suppliers s on p.idSupplier = s.idSupplier join kidstore.discount_products dp on p.idProduct=dp.idProduct join kidstore.discounts d on dp.idDiscount = d.idDiscount where d.percentage > 15 and p.isActive ='1' and d.Status = 1 and s.isActive = '1' order by priceProduct asc limit 4 ;";
-//		try (Connection conn = DBContext.getConnection();
-//				PreparedStatement ps = conn.prepareStatement(query);
-//				ResultSet rs = ps.executeQuery();) {
-//
-//			while (rs.next()) {
-//				list.add(new Product(rs.getInt("idProduct"), rs.getString("nameProduct"), rs.getDouble("priceProduct"),
-//						UtilDAO.findListImageByIdProduct(rs.getInt("idProduct")), rs.getInt("percentage")));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return list;
-//	}
 	public static List<Product> getSellProduct() {
 		Jdbi me = DBContext.me();
 		String query ="SELECT products.id,products.nameProduct,product_prices.listPrice,discount,discountPrice FROM kidstore.products join kidstore.product_prices\n" +
@@ -159,11 +142,5 @@ public class IndexDAO {
 						rs.getDouble("listPrice"), UtilDAO.findListImageByIdProduct(rs.getInt("id")),
 						rs.getInt("discount"),rs.getDouble("discountPrice")))
 				.list());
-	}
-
-	public static void main(String[] args) {
-		System.out.println(getSuperSellProduct());
-//		System.out.println(getSellProductTwo());
-
 	}
 }
