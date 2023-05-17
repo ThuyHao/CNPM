@@ -19,7 +19,6 @@ public class DetailControl extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String id = request.getParameter("pid");
-		System.out.println("cc");
 		Product p = UtilDAO.findProductById(Integer.parseInt(id));
 		request.setAttribute("detail", p);
 		request.getRequestDispatcher("/client/Detail.jsp").forward(request, response);

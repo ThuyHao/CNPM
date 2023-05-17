@@ -2,6 +2,7 @@ package util;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -80,7 +81,5 @@ public class SendEmail {
 	}
 
 	public static void main(String[] args) {
-//		sendMailFogetPassWord("leminhlongit@gmail.com", "KHASasd");
-		
 	}
 }

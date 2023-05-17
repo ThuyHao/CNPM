@@ -11,7 +11,6 @@ plugins {
     id 'war'
 
 }
-
 repositories {
     mavenLocal()
     maven {
@@ -26,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'mysql:mysql-connector-java:8.0.26'
+    implementation 'mysql:mysql-connector-java:8.0.28'
     implementation 'org.jdbi:jdbi3-core:3.23.0'
     implementation 'javax.servlet:javax.servlet-api:3.1.0'
     implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'

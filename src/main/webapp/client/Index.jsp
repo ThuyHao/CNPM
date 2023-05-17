@@ -279,7 +279,7 @@
                                 <div class="clearfix"></div>
                                 <div class="sk-viewmore-block-green">
                                     <div class="sk-viewmore-block-inner text-center">
-                                        <%--										<c:url var="ShowProduct" value="ShowProductControl" />--%>
+                                        										<c:url var="ShowProduct" value="/ShowProduct" />
                                         <a href="${ShowProduct}"><span><fmt:message
                                                 key="VIEW.ALL.PRODUCTS" bundle="${lang}"></fmt:message><i
                                                 class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span></a>

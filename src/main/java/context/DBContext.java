@@ -1,9 +1,12 @@
 package context;
 
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -52,13 +55,7 @@ public class DBContext {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(getConnection());
-//		Jdbi me = DBContext.me();
-//		List<Product> list = me.withHandle(handle -> {
-//			return handle.createQuery("select  * from products").mapToBean(Product.class).stream()
-//					.collect(Collectors.toList());
-//		});
-//		System.out.println(list);
+//		System.out.println(getConnection());
 	}
 
 }

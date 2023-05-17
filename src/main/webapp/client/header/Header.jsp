@@ -1,6 +1,4 @@
-<%@ page import="entity.OrderDetail" %>
-<%@ page import="java.util.Map" %>
-<%@ page language="java" contentType="text/html;UTF-8"
+<%@ page language="Java" contentType="text/html;UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -55,15 +53,19 @@
                                     href="?${fn:substring(query, 0, query.length()-12)}&&lang=en_US">English</a></c:if>
                         </c:if>
                     </li>
-                    <li><c:url var="searchct" value=""></c:url>
-                        <form action="${pageContext.request.contextPath}/${searchct}" method="get"
+                    <%--Gọi đến --%>
+                    <li><c:url var="searchControl" value="search"></c:url>
+                        <form action="${pageContext.request.contextPath}/${searchControl}" method="get"
                               class="form-inline sk-search-in-nav">
                             <div class="form-group">
-
-                                <input type="text" class="form-control sk-search-field"
-                                       placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
-                                       value="${requestScope.search}" name="search">
+                                <%--8.1: Nhập từ khóa tìm kiếm --%>
+                                <label>
+                                    <input type="text" class="form-control sk-search-field"
+                                           placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
+                                           value="${requestScope.search}" name="search">
+                                </label>
                             </div>
+                            <%--8.2 : Nhấn nút tìm kiếm hoặc nhấn nút enter trên bàn phím --%>
                             <button type="submit" class="sk-search-btn">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -98,9 +100,10 @@
                 <ul class="sk-top-nav-mobile"
                     style="position: relative; z-index: 9;">
                     <li>
-                        <form action="${searchct}" method="get"
+                        <form action="${searchControl}" method="get"
                               class="form-inline sk-search-in-nav">
                             <div class="form-group sk-search-input">
+                                <label for="sk-input"></label>
                                 <input id="sk-input" type="text"
                                        class="form-control sk-search-field"
                                        placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
