@@ -1,6 +1,4 @@
-<%@ page import="entity.OrderDetail" %>
-<%@ page import="java.util.Map" %>
-<%@ page language="java" contentType="text/html;UTF-8"
+<%@ page language="Java" contentType="text/html;UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -16,22 +14,8 @@
                 <ul class="nav navbar-nav navbar-left sk-top-nav-left"
                     style="position: relative; z-index: 9;">
                     <c:url var="edit" value="EditControl"></c:url>
-                    <c:url var="admin" value="/admin/login.jsp"></c:url>
                     <c:url var="logout" value="/LogoutControl"></c:url>
                     <c:if test="${sessionScope.acc != null}">
-                        <c:if test="${sessionScope.acc.idRoleMember == 1}">
-                            <li><a href="${pageContext.request.contextPath}/${edit}"><i
-                                    class="fa fa-user"></i> <fmt:message key="Hello"
-                                                                         bundle="${lang}"></fmt:message>: Admin
-                                    ${sessionScope.acc.fullName} </a></li>
-                            <li><a href="${pageContext.request.contextPath}/${admin}">
-                                <fmt:message key="Website.management" bundle="${lang}"></fmt:message>
-                            </a></li>
-
-                            <li><a href="${logout}"> <fmt:message key="log.out"
-                                                                  bundle="${lang}"></fmt:message>
-                            </a></li>
-                        </c:if>
                         <c:if test="${sessionScope.acc.idRoleMember == 0}">
                             <li><a href="${pageContext.request.contextPath}/${edit}"><i
                                     class="fa fa-user"></i> <fmt:message key="Hello"
@@ -69,15 +53,19 @@
                                     href="?${fn:substring(query, 0, query.length()-12)}&&lang=en_US">English</a></c:if>
                         </c:if>
                     </li>
-                    <li><c:url var="searchct" value="SearchControl"></c:url>
-                        <form action="${pageContext.request.contextPath}/${searchct}" method="get"
+                    <%--Gọi đến --%>
+                    <li><c:url var="searchControl" value="search"></c:url>
+                        <form action="${pageContext.request.contextPath}/${searchControl}" method="get"
                               class="form-inline sk-search-in-nav">
                             <div class="form-group">
-
-                                <input type="text" class="form-control sk-search-field"
-                                       placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
-                                       value="${requestScope.search}" name="search">
+                                <%--8.1: Nhập từ khóa tìm kiếm --%>
+                                <label>
+                                    <input type="text" class="form-control sk-search-field"
+                                           placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
+                                           value="${requestScope.search}" name="search">
+                                </label>
                             </div>
+                            <%--8.2 : Nhấn nút tìm kiếm hoặc nhấn nút enter trên bàn phím --%>
                             <button type="submit" class="sk-search-btn">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -112,9 +100,10 @@
                 <ul class="sk-top-nav-mobile"
                     style="position: relative; z-index: 9;">
                     <li>
-                        <form action="${searchct}" method="get"
+                        <form action="${searchControl}" method="get"
                               class="form-inline sk-search-in-nav">
                             <div class="form-group sk-search-input">
+                                <label for="sk-input"></label>
                                 <input id="sk-input" type="text"
                                        class="form-control sk-search-field"
                                        placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
@@ -146,12 +135,12 @@
                             href="${pageContext.request.contextPath}/${index}"><fmt:message
                             key="Home" bundle="${lang}"></fmt:message></a></li>
 
-                    <li class=""><c:url var="intro" value="/client/Introduce.jsp"></c:url>
-                        <a href="${pageContext.request.contextPath}/${intro}"><fmt:message
+                    <li class="">
+                        <a href="${pageContext.request.contextPath}/client/Introduce.jsp"><fmt:message
                                 key="Introduce" bundle="${lang}"></fmt:message></a></li>
 
-                    <li class=""><c:url var="service" value="/client/Service.jsp"></c:url>
-                        <a href="${pageContext.request.contextPath}/${service}"><fmt:message
+                    <li class="">
+                        <a href="${pageContext.request.contextPath}/client/Service.jsp"><fmt:message
                                 key="service" bundle="${lang}"></fmt:message></a></li>
 
                 </ul>
@@ -163,7 +152,7 @@
                                                                                  bundle="${lang}"></fmt:message><b
                             class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <c:url var="showProduct" value="ShowProductControl"></c:url>
+                            <c:url var="showProduct" value=""></c:url>
                             <li class=""><a
                                     href="${pageContext.request.contextPath}/${showProduct}?cid=0"><fmt:message
                                     key="All.products" bundle="${lang}"></fmt:message></a></li>
@@ -184,7 +173,7 @@
                                     href="${pageContext.request.contextPath}/${showProduct}?cid=4"><fmt:message
                                     key="Promotion" bundle="${lang}"></fmt:message></a></li>
                             <li class=""><a
-                                    href="${pageContext.request.contextPath}/${showProduct}?cid=5"><fmt:message
+                                    href=""><fmt:message
                                     key="Toys" bundle="${lang}"></fmt:message></a></li>
                         </ul>
                     </li>
@@ -193,8 +182,8 @@
                             href="https://vnexpress.net/tag/thoi-trang-tre-em-92352"><fmt:message
                             key="news" bundle="${lang}"></fmt:message></a></li>
 
-                    <li class=""><c:url var="contact" value="/client/Contact.jsp"></c:url>
-                        <a href="${pageContext.request.contextPath}/${contact}"><fmt:message
+                    <li class="">
+                        <a href="${pageContext.request.contextPath}/client/Contact.jsp"><fmt:message
                                 key="Contact" bundle="${lang}"></fmt:message></a></li>
                 </ul>
             </div>

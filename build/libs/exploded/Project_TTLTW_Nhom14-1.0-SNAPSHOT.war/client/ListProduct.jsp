@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 breadcrumb-wrap">
                                 <ol class="breadcrumb">
-                                    <li><a href="#">Trang ch?</a></li>
+                                    <li><a href="#">Trang chủ</a></li>
                                     <li class="active">Tất cả sản phẩm</li>
                                 </ol>
                             </div>
@@ -82,28 +82,28 @@
                         <div class="col-md-6 col-sm-6 filter-wrap no-padding-right">
                             <div class="filter-inner">
                                 <div id="sort-by">
-                                    <c:url var="showProduct" value="ShowProductControl"></c:url>
+                                    <c:url var="showProduct" value=""></c:url>
                                     <form class="form-inline form-viewpro"
                                           action="${showProduct}?index=${requestScope.tag}&cid=${requestScope.cid}&search=${requestScope.search}"
                                           method="post">
                                         <div class="form-group">
                                             <label for="selectFilter"></label><select class="sort-by-script" name="sort"
                                                                                       id="selectFilter">
-                                            <option value="pid-asc"
+                                            <option value="id-asc"
                                                     <c:if test="${requestScope.sort==null}">selected</c:if>>
                                                 <fmt:message key="default" bundle="${lang}"></fmt:message></option>
-                                            <option value="price-asc"
-                                                    <c:if test="${requestScope.sort=='priceProduct-asc'}">selected</c:if>>
+                                            <option value="discountPrice-asc"
+                                                    <c:if test="${requestScope.sort=='discountPrice-asc'}">selected</c:if>>
                                                 <fmt:message key="prices.increase"
                                                              bundle="${lang}"></fmt:message></option>
-                                            <option value="price-desc"
-                                                    <c:if test="${requestScope.sort=='priceProduct-desc'}">selected</c:if>>
+                                            <option value="discountPrice-desc"
+                                                    <c:if test="${requestScope.sort=='discountPrice-desc'}">selected</c:if>>
                                                 <fmt:message key="prices.decrease"
                                                              bundle="${lang}"></fmt:message></option>
-                                            <option value="name-asc"
+                                            <option value="nameProduct-asc"
                                                     <c:if test="${requestScope.sort=='nameProduct-asc'}">selected</c:if>>
                                                 <fmt:message key="A-Z" bundle="${lang}"></fmt:message></option>
-                                            <option value="name-desc"
+                                            <option value="nameProduct-desc"
                                                     <c:if test="${requestScope.sort=='nameProduct-desc'}">selected</c:if>>
                                                 <fmt:message key="Z-A" bundle="${lang}"></fmt:message></option>
                                         </select>
@@ -118,6 +118,12 @@
                     </div>
                     <div class="sk-product-list">
                         <div class="row">
+                            <%--8.8 : Hệ thống sẽ kiểm tra xem danh sách sản phẩm trả về có rỗng hay không.--%>
+                            <c:if test="${requestScope.listProduct.size() == 0}">
+                                <%--8.10 : Hệ thống sẽ hiển thị thông báo “Không tìm thấy sản phẩm” trên trang danh sách sản phẩm.--%>
+                                <span style="font-size: 20px; color: red; padding-left: 200px;;">Không tìm thấy sản phẩm</span>
+                            </c:if>
+                            <%--8.9	: Nếu danh sách là không rỗng thì hiện danh sách sản phẩm khớp với từ khóa lên trang màn hình danh sách sản phẩm.--%>
                             <c:url value="DetailControl" var="detailP"></c:url>
                             <c:forEach var="o" items="${requestScope.listProduct}">
                                 <div class="col-md-3 col-sm-6 col-xs-12">
@@ -134,7 +140,7 @@
 
                                             <div class="price-box">
                                                 <span class="price"> ${o.listPrice} </span> <span
-                                                    class="price-compare"> ${o.discountPrice}? </span>
+                                                    class="price-compare"> ${o.discountPrice} </span>
                                             </div>
 
                                         </div>
@@ -149,7 +155,9 @@
                                                 <button class="button btn-cart btn-more product-atc"
                                                         title="Mua hàng" type="button">
 													<span style="display: inline-block;"> <!-- Dùng inline-block để đảm bảo span chỉ chiếm không gian cần thiết -->
-                                                        <img src="./images/MuaNgay.gif" alt="" style="width: 140%; height: auto; margin-left: -20%;"> <!-- Thay đổi kích thước theo % -->
+                                                        <img src="./images/MuaNgay.gif" alt=""
+                                                             style="width: 140%; height: auto; margin-left: -20%;">
+                                                        <!-- Thay đổi kích thước theo % -->
                                                     </span>
                                                 </button>
                                             </a>
@@ -163,39 +171,39 @@
                 <div class="sk-category-paging-wrap">
                     <div class="pull-right">
                         <ul class="pagination">
-                            <c:if test="${tag>1 }">
+                            <c:if test="${requestScope.tag>1 }">
                                 <li><a
-                                        href="${requestScope.ShowProduct}?index=${tag-1}&sort=${sort}&cid=${cid}&search=${search}"
+                                        href="${requestScope.ShowProduct}?index=${requestScope.tag-1}&sort=${requestScope.sort}&cid=${requestScope.cid}&search=${requestScope.search}"
                                         aria-label="Previus"> <span class="fa fa-caret-left"></span>
                                 </a></li>
                             </c:if>
                             <c:forEach begin="1" end="${requestScope.endPage}" var="i">
                                 <c:if test="${i == requestScope.tag}">
-                                    <li class="page-item active"><c:if test="${!empty cid}">
+                                    <li class="page-item active"><c:if test="${!empty requestScope.cid}">
                                         <a
-                                                href="${ShowProduct}?index=${i}&cid=${cid}&sort=${sort}&search=${search}"
+                                                href="${requestScope.ShowProduct}?index=${i}&cid=${requestScope.cid}&sort=${requestScope.sort}&search=${requestScope.search}"
                                                 class="page-link">${i}</a>
-                                    </c:if> <c:if test="${empty cid}">
+                                    </c:if> <c:if test="${empty requestScope.cid}">
                                         <a
-                                                href="${ShowProduct}?index=${i}&search=${search}&sort=${sort}&cid=${cid}"
+                                                href="${requestScope.ShowProduct}?index=${i}&search=${requestScope.search}&sort=${requestScope.sort}&cid=${requestScope.cid}"
                                                 class="page-link">${i}</a>
                                     </c:if></li>
                                 </c:if>
                                 <c:if test="${i != requestScope.tag}">
                                     <li class="page-item"><c:if test="${!empty requestScope.cid}">
                                         <a
-                                                href="${ShowProduct}?index=${i}&cid=${cid}&sort=${sort}&search=${search}"
+                                                href="${requestScope.ShowProduct}?index=${i}&cid=${requestScope.cid}&sort=${requestScope.sort}&search=${requestScope.search}"
                                                 class="page-link">${i}</a>
-                                    </c:if> <c:if test="${empty cid}">
+                                    </c:if> <c:if test="${empty requestScope.cid}">
                                         <a
-                                                href="${ShowProduct}?index=${i}&search=${search}&sort=${sort}"
+                                                href="${requestScope.ShowProduct}?index=${i}&search=${requestScope.search}&sort=${requestScope.sort}"
                                                 class="page-link">${i}</a>
                                     </c:if></li>
                                 </c:if>
                             </c:forEach>
-                            <c:if test="${tag< endP}">
+                            <c:if test="${requestScope.tag< requestScope.endPage}">
                                 <li><a
-                                        href="${ShowProduct}?index=${tag+1}&sort=${sort}&cid=${cid}&search=${search}"
+                                        href="${requestScope.ShowProduct}?index=${requestScope.tag+1}&sort=${requestScope.sort}&cid=${requestScope.cid}&search=${requestScope.search}"
                                         aria-label="Next"> <span class="fa fa-caret-right"></span>
                                 </a></li>
                             </c:if>

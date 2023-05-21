@@ -58,9 +58,9 @@ publishing {
 apply plugin: 'org.hidetake.ssh'
 remotes {
     host {
-        host = '192.168.18.8'
-        user = 'root'
-        password = '123456'
+        host = '35.186.157.161'
+        user = 'g20130253'
+        identity = file('C:/Users/RynVi/.ssh/id_rsa')
     }
 }
 ssh.settings {
@@ -86,10 +86,10 @@ task docker_upload_file_to_server {
         println 'begin docker_upload_file_to_server'
         ssh.run {
             session(remotes.host) {
-                remove '/usr/deploy/KIDSHOP.war'
+                remove '/usr/deploy/.war'
 
-                put from: "${project.projectDir}/build/libs/Project_TTLTW_Nhom14-1.0-SNAPSHOT.war",
-                        into: "/usr/deploy/KIDSHOP.war"
+                put from: "${project.projectDir}/build/libs/HaLoShop-1.0-SNAPSHOT.war",
+                        into: "/usr/deploy/.war"
             }
         }
     }

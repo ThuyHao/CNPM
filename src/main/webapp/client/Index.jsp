@@ -9,6 +9,7 @@
 <html lang="vi">
 <head>
     <title>HaLo's Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" type="image" href="./images/HaLoicon.png"/>
     <jsp:include page="./link/Link.jsp"></jsp:include>
 </head>

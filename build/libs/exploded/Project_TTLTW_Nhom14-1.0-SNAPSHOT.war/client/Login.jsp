@@ -76,7 +76,7 @@
 							<div class="row">
 								<div class="col-md-2">
 									<p>
-										<fmt:message key="email" bundle="${lang}"></fmt:message>
+										<fmt:message key="account" bundle="${lang}"></fmt:message>
 									</p>
 								</div>
 								<div class="col-md-10">
@@ -118,8 +118,7 @@
 															.toggle("hide-password");
 												});
 							</script>
-							<div class="g-recaptcha"
-								 data-sitekey="6LcEOp4kAAAAAKd6WPwrePNY_OkIHz9GO7hDSmcb" data></div>
+
 
 							<div class="row">
 								<p style="color: red;">${error}</p>
@@ -137,13 +136,6 @@
 								</div>
 							</div>
 						</form>
-						<fb:login-button scope="public_profile,email"
-										 onlogin="checkLoginState();"></fb:login-button>
-						<a
-								href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/haloshop/LoginGoogle&response_type=code&client_id=179083726954-c2jcc0955730he68g9vk8s8f2bgi6l3k.apps.googleusercontent.com&approval_prompt=force"
-								class="social-login--google"><img width="129px"
-																  height="37px" alt="google-login-button"
-																  src="//bizweb.dktcdn.net/assets/admin/images/login/gp-btn.svg"></a>
 					</div>
 				</div>
 				<div class="col-md-2"></div>
@@ -190,59 +182,7 @@
 	<!-- End Main Content -->
 	<jsp:include page="./footer/Footer.jsp"></jsp:include>
 </div>
-<script>
-	function statusChangeCallback(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
-		if (response.status === 'connected') {
-			testAPI();
-		} else {
-			document.getElementById('status').innerHTML = 'Please log '
-					+ 'into this app.';
-		}
-	}
 
-	function checkLoginState() {
-		FB.login(function(response) {
-			if (response.status === 'connected') {
-				// Lấy thông tin người dùng
-				FB.api('/me?fields=id,name,email,picture.width(150).height(150)', function(response) {
-					console.log(response);
-					var userId = response.id;
-					var pictureUrl = 'https://graph.facebook.com/' + userId + '/picture?type=large';
-					window.location.href = 'LoginFacebook?action=Face&name='
-							+ response.name + '&email=' + response.email + '&id='
-							+ userId + '&picture=' +  pictureUrl;
-					document.getElementById('user-avatar').setAttribute('src', pictureUrl);
-				});
-			}
-		});
-	}
-
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId : '717812036479827',
-			cookie : true,
-			xfbml : true,
-			version : 'v16.0'
-		});
-
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
-
-	};
-
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id))
-			return;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-</script>
 </body>
 
 </html>
