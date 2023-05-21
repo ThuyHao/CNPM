@@ -134,11 +134,6 @@
 </div>
 <footer>
 	<div class="container text-center">
-		©
-		<fmt:message key="Copyright.by.web.developers" bundle="${lang}"></fmt:message>
-		<a href="https://www.facebook.com/leminh.long.9678/" title="author"
-			rel="nofollow">Lê Minh Long</a> & <a
-			href="https://www.facebook.com/Thuy.Hao.15622RynViaKingdom"
-			title="author" rel="nofollow">La Thị Thúy Hảo</a>
+
 	</div>
 </footer>

@@ -5,6 +5,7 @@
 <fmt:setLocale value="${sessionScope.LANG}" />
 <fmt:setBundle basename="web.lang.resource.app" var="lang" />
 <c:url value="/client/assets" var="url"></c:url>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- CSS -->
 <%-- <link href="//bizweb.dktcdn.net/100/117/632/themes/157694/assets/style.css?1564585558451" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="${url}/css/checkout.css">

@@ -17,12 +17,12 @@ import com.zaxxer.hikari.HikariDataSource;
 //import entity.Product;
 
 public class DBContext {
-	private static final String serverName = "localhost";
-	private static final String dbName = "kidstore";
+	private static final String serverName = "34.87.174.194";
+	private static final String dbName = "haloshop";
 	private static final String portNumber = "3306";
 	private static final String instance = "";// LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
 	private static final String userID = "root";
-	private static final String password = "thuyhao15062002";
+	private static final String password = "halo123";
 	private static final HikariDataSource dataSource;
 	static Jdbi jdbi;
 	
@@ -55,7 +55,7 @@ public class DBContext {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		System.out.println(getConnection());
+		System.out.println(getConnection());
 	}
 
 }

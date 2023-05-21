@@ -62,7 +62,7 @@
                                 <label>
                                     <input type="text" class="form-control sk-search-field"
                                            placeholder="<fmt:message key="Find" bundle="${lang}"></fmt:message>"
-                                           value="${requestScope.search}" name="search">
+                                           value="${requestScope.search}" name="search" required>
                                 </label>
                             </div>
                             <%--8.2 : Nhấn nút tìm kiếm hoặc nhấn nút enter trên bàn phím --%>
